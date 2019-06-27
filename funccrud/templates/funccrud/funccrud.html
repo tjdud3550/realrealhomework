@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>싀알류디연습</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -15,7 +18,7 @@
         <p>{{blog.body}}</p>
         <p>댓글 수 : {{blog.comments.count}}</p>
         <a href="{% url 'update' blog.id %}">수정</a>
-        <a href="{% url 'delete' blog.id %}">삭제</a>
+        <a href="{% url 'delete' blog.id %}" id="delete">삭제</a>
         <hr>
         <a  href="{% url 'add_comment' blog.id %}">댓글 달기</a>
         {% for comment in blog.comments.all %}
@@ -31,4 +34,16 @@
         <br>
     {% endfor %}
 </body>
+
+<script>
+    $('#delete').click(function(){
+        // alert('sfd');
+        if (confirm('Are you sure?') == true) {
+
+        } else {
+            return false;
+        }
+    });
+</script>
+
 </html>

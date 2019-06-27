@@ -69,12 +69,13 @@ def create(request):
 @login_required(login_url='/login/')
 def update(request, pk):
     blog = get_object_or_404(Blog, pk = pk)
-    form = NewBlog(request.POST, instance=blog)
-
-    if form.is_valid():
-        form.save()
-        return redirect('home')
-
+    if request.method == "POST":
+        form = NewBlog(request.POST, instance=blog)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+       form = NewBlog(instance=blog) 
     return render(request, 'funccrud/new.html', {'form':form})
 
 @login_required(login_url='/login/')

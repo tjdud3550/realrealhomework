@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from .models import Blog
+# comment 추가
+from .models import Blog, Comment
 from .forms import NewBlog, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -18,6 +19,25 @@ def add_comment(request, pk):
             return redirect('home')
     else:
         form = CommentForm()
+    return render(request, 'funccrud/add_comment.html', {'form': form})
+
+# 추가하고, url도 추가
+def del_comment(request, pk):
+    comment = get_object_or_404(Comment, pk = pk)
+    comment.delete()
+    return redirect('home')
+
+ # 댓글 수정   
+@login_required(login_url='/login/')
+def edit_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            comment.save()
+            return redirect('home')
+    else:
+        form = CommentForm(instance=comment)
     return render(request, 'funccrud/add_comment.html', {'form': form})
 
 def welcome(request):
@@ -48,8 +68,9 @@ def logout(request):
     auth.logout(request)
     return redirect('home')
 
+# 카테고리 필터, order_by 정렬
 def read(request):
-    blogs = Blog.objects.all()
+    blogs = Blog.objects.all().filter(category='과제').order_by('-created_date')
     return render(request, 'funccrud/funccrud.html', {'blogs':blogs})
 
 @login_required(login_url='/login/')

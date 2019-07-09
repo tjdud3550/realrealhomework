@@ -1,1 +1,1 @@
-web: gunicorn session_crud.wsgi --log-file -
+web: gunicorn qhcnd.wsgi --log-file -

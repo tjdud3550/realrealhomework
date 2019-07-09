@@ -5,7 +5,8 @@
     <title>싀알류디연습</title>
 </head>
 <body>
-    <h1>New Post</h1>
+    <h1>글 쓰기</h1>
+    <a href="{% url 'home' %}">뒤로가기</a>
     <form method='POST'>
         {% csrf_token %}
         <table>

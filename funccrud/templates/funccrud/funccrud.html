@@ -12,7 +12,7 @@
 <body>
     <div class = "box">
         {% if user.is_authenticated %}
-        <a href="{% url 'welcome' %}">글쓰기</a>
+        <a href="{% url 'newblog' %}">글쓰기</a>
         {% else %}
         <p>로그인을 해주세요.</p>
         {% endif %}
@@ -39,7 +39,7 @@
         <a href="?page={{posts.next_page_number}}">Next</a>
         <a href="?page={{posts.paginator.num_pages}}">Last</a>
         {%endif%}
-    </div>
+        </div>
 </body>
 
 </html>

@@ -60,7 +60,8 @@ def read(request):
     blogs = Blog.objects.all()
     
     # 필터링, 정렬
-    blog_list = Blog.objects.all().filter(category='과제').order_by('-created_date')
+    # blog_list = Blog.objects.all().filter(category='과제').order_by('-created_date')
+    blog_list = Blog.objects.all()
     # 페이지네이션
     paginator = Paginator(blog_list, 4)
     page = request.GET.get('page')

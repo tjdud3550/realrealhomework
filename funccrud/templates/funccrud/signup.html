@@ -1,3 +1,9 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="box">
 {% block content %}
 
 <h1>회원가입</h1>
@@ -21,4 +27,7 @@ Confirm Password:
 <input type="submit" value="Sign Up!">
 </form>
 
+<a href="{%url 'welcome' %}">뒤로가기</a>
 {% endblock %}
+</div>
+</body>

@@ -1,3 +1,9 @@
+{% load staticfiles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="box">
 {% block content %}
 
 {% if error %}
@@ -23,6 +29,8 @@
     <input type="submit" value="Login">
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
-<a href="{%url 'welcome' %}">back to home</a>
+<a href="{%url 'welcome' %}">뒤로가기</a>
 
 {% endblock %}
+</div>
+</body>

@@ -1,0 +1,9 @@
+body {
+    background-image: url('https://t1.daumcdn.net/cfile/tistory/9998D53B5A9ACE6206');
+    background-size: cover;
+}
+
+.box{
+    background-color: white;
+    opacity: 0.8;
+}

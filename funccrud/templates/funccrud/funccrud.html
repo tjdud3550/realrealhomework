@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html lang="ko">
+{% load staticfiles %}
 <head>
     <meta charset="UTF-8">
-    <title>싀알류디연습</title>
+    <title>목록</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    {% if user.is_authenticated %}
-    <a href="{% url 'newblog' %}">글쓰기</a>
-    {% endif %}
-    {% for blog in posts %}
-        <h2><a href= "{% url 'detail' blog.id %}"> 제목 : {{blog.title}} </a></h2>
-        <!-- 카테고리 추가, 다듬기 -->
-        <h3>분류 : {{blog.category}} | 작성자 : {{blog.author}} | 작성시간 : {{blog.created_date}} | 댓글 수 : {{blog.comments.count}}</h3>
-        <hr>
-        <br>
-        <br>
-    {% endfor %}
+    <div class = "box">
+        {% if user.is_authenticated %}
+        <a href="{% url 'welcome' %}">글쓰기</a>
+        {% else %}
+        <p>로그인을 해주세요.</p>
+        {% endif %}
+        <a href="{% url 'welcome' %}">뒤로가기</a>
+        {% for blog in posts %}
+            <h2><a href= "{% url 'detail' blog.id %}"> 제목 : {{blog.title}} </a></h2>
+            <!-- 카테고리 추가, 다듬기 -->
+            <h3>분류 : {{blog.category}} | 작성자 : {{blog.author}} | 작성시간 : {{blog.created_date}} | 댓글 수 : {{blog.comments.count}}</h3>
+            <hr>
+            <br>
+            <br>
+        {% endfor %}
 
-    {%if posts.has_previous%}
-    <a href="?page=1">First</a>
-    <a href="?page={{posts.previous_page_number}}">Previous</a>
-    {%endif%}
+        {%if posts.has_previous%}
+        <a href="?page=1">First</a>
+        <a href="?page={{posts.previous_page_number}}">Previous</a>
+        {%endif%}
 
-    <span>{{posts.number}}</span>
-    <span>of</span>
-    <span>{{posts.paginator.num_pages}}</span>
+        <span>{{posts.number}}</span>
+        <span>of</span>
+        <span>{{posts.paginator.num_pages}}</span>
 
-    {%if posts.has_next%}
-    <a href="?page={{posts.next_page_number}}">Next</a>
-    <a href="?page={{posts.paginator.num_pages}}">Last</a>
-    {%endif%}
+        {%if posts.has_next%}
+        <a href="?page={{posts.next_page_number}}">Next</a>
+        <a href="?page={{posts.paginator.num_pages}}">Last</a>
+        {%endif%}
+    </div>
 </body>
 
 </html>
